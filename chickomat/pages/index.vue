@@ -1,73 +1,72 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        chickomat
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
-  </div>
+	<div style="width: 100%; height: 100%;">
+		<cookie-alert />
+		<selections-container>
+			<section1 />
+			<section2 />
+			<section3 />
+			<footer-section />
+		</selections-container>
+	</div>
 </template>
 
 <script>
-export default {}
+import CookieAlert from '~/components/CookieAlert.vue';
+import Section1 from '~/components/sections/Section1.vue';
+import Section2 from '~/components/sections/Section2.vue';
+import Section3 from '~/components/sections/Section3.vue';
+import FooterSection from '~/components/sections/FooterSection.vue';
+
+import SelectionsContainer from '~/components/SelectionsContainer.vue'
+
+export default {
+  components: {
+		CookieAlert,
+		Section1,
+		Section2,
+    Section3,
+		FooterSection,
+		SelectionsContainer,
+  },
+	methods: {
+		checkDeviceType: function(){
+			let md = new MobileDetect(window.navigator.userAgent);
+		  let html = document.getElementsByTagName("html")[0];
+
+		  this.setClassState(md.mobile(),html,"mobile");
+		  this.setClassState(md.phone(),html,"phone");
+		  this.setClassState(md.tablet(),html,"tablet")
+		},
+		setClassState: function(condition, element, class_name){
+		  if(condition){
+		    element.classList.add(class_name);
+		  }else{
+		    element.classList.remove(class_name);
+		  }
+		}
+	},
+	mounted: function() {
+		this.checkDeviceType();
+	}
+}
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-
-.title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
-}
+	:root{
+    --blueprintColor: #269;
+    --blueprintColorDarker: #123650;
+	  --red: #ea4335;
+	  --blue: #b0d3b6;
+	}
+	.section{
+	    width: 100%;
+	}
+	.section:not(#footer_section):not(#first_section){
+	    padding-bottom: 1%;
+	    padding-top: 1%;
+	}
+	html.phone .section:not(#footer_section):not(#first_section){
+	    padding-bottom: 5%;
+	    padding-top: 2%;
+	}
 </style>

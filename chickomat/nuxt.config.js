@@ -1,63 +1,58 @@
 
 export default {
-  /*
-  ** Nuxt rendering mode
-  ** See https://nuxtjs.org/api/configuration-mode
-  */
-  mode: 'universal',
-  /*
-  ** Nuxt target
-  ** See https://nuxtjs.org/api/configuration-target
-  */
-  target: 'static',
-  /*
-  ** Headers of the page
-  ** See https://nuxtjs.org/api/configuration-head
-  */
+  mode: 'spa',
   head: {
-    title: process.env.npm_package_name || '',
+    title: "Chickomat Projekt Jugend Forscht",
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+			{ name: 'google-site-verification', content: '' },
+      { hid: 'description', name: 'description', content: 'Informationen und Bilder zum Jugend Forscht Projekt Chickomat. Von Jonathan Treffler, Janik Atzenbeck, Christoph Greger.' },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+			{ rel: "preload", href: "/fonts/POLYA.woff2", as: "font", type: "font/woff2", crossorigin: ""},
+    ],
+		script: [
+				{
+					src: "https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js",
+					type: "text/javascript"
+				},
+				{
+					src: "https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js",
+					type: "text/javascript"
+				},
+				{
+					src: "https://cdn.jsdelivr.net/npm/mobile-detect@1.4.3/mobile-detect.min.js",
+					type: "text/javascript"
+				},
+				{
+					src: "https://cdn.jsdelivr.net/npm/sweetalert2@8",
+					type: "text/javascript"
+				},
+				{
+					src: "https://www.googletagmanager.com/gtag/js?id=",
+					type: "text/javascript"
+				},
+		],
   },
-  /*
-  ** Global CSS
-  */
-  css: [
-  ],
-  /*
-  ** Plugins to load before mounting the App
-  ** https://nuxtjs.org/guide/plugins
-  */
+  loading: { color: '#fff' },
+	css: [
+		"css/global.css"
+	],
   plugins: [
   ],
-  /*
-  ** Auto import components
-  ** See https://nuxtjs.org/api/configuration-components
-  */
-  components: true,
-  /*
-  ** Nuxt.js dev-modules
-  */
-  buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module'
+	buildModules: [
+    '@aceforth/nuxt-optimized-images',
   ],
-  /*
-  ** Nuxt.js modules
-  */
+  optimizedImages: {
+    optimizeImages: true
+  },
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
   ],
-  /*
-  ** Build configuration
-  ** See https://nuxtjs.org/api/configuration-build/
-  */
   build: {
+    extend (config, ctx) {
+    }
   }
 }
