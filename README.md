@@ -10,3 +10,7 @@
 - __Website__
 - [Arduino Software](https://github.com/chickomat/arduino-control-software)
 - [Raspberry Software](https://github.com/chickomat/raspberry-control-software)
+
+## Screenshot
+
+<img src="https://raw.githubusercontent.com/chickomat/chickomat.github.io/dev/img/screenshot.png">
