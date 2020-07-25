@@ -1,0 +1,35 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+
+    - name: "Install Dependencies"
+      run: npm install
+      working-directory: chickomat
+
+    - name: "Build static Website"
+      run: npm run generate
+      working-directory: chickomat
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.5.5
+      with:
+        BRANCH: master
+        FOLDER: chickomat/dist/
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BASE_BRANCH: dev
+        SINGLE_COMMIT: true
+
+    #- name: "Notify Google Search Index"
+    #  run: curl http://www.google.com/ping?sitemap=
