@@ -31,5 +31,5 @@ jobs:
         BASE_BRANCH: dev
         SINGLE_COMMIT: true
 
-    #- name: "Notify Google Search Index"
-    #  run: curl http://www.google.com/ping?sitemap=
+    - name: "Notify Google Search Index"
+      run: curl http://www.google.com/ping?sitemap=https://chickomat.github.io/sitemap.xml
