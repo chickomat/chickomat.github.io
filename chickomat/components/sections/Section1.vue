@@ -1,7 +1,14 @@
 <template>
-	<div class="section blueprintBackground" id="first_section">
+	<div id="first_section" class="section blueprintBackground">
 		<span id="main_headline">Der Chickomat</span>
-		<svg id="scroll_button" onclick="$('body').scrollTo('#second_section',{duration: 500, easing: 'swing'});" xmlns="http://www.w3.org/2000/svg" width="75" height="75" viewBox="0 0 24 24"><path fill="var(--blueprintColor)" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/><path fill="none" d="M0 0h24v24H0V0z"/></svg>
+		<svg
+			id="scroll_button"
+			onclick="$('body').scrollTo('#second_section',{duration: 500, easing: 'swing'});"
+			xmlns="http://www.w3.org/2000/svg"
+			width="75"
+			height="75"
+			viewBox="0 0 24 24"
+		><path fill="var(--blueprintColor)" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" /><path fill="none" d="M0 0h24v24H0V0z" /></svg>
 	</div>
 </template>
 <style>

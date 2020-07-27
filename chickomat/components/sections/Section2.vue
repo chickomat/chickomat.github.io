@@ -1,21 +1,31 @@
 <template>
-	<div class="section" id="second_section">
+	<div id="second_section" class="section">
 		<headline>About</headline>
-		<p class="about_text">Landwirte sind beim Verreisen eingeschränkt, weil sie Tiere versorgen müssen.</p>
-		<p class="about_text">Darunter zählt auch das Füttern. Um mehr Flexibilität zu bieten haben wir einen vollautomatischen Tierfütterautomat für Hühner entwickelt und gebaut.</p>
-		<p class="about_text">Er übernimmt die Versorgung der Hühner mit Futter und Wasser vollautomatisch.</p>
-		<p class="about_text">Dazu können täglich bis zu zwei Fütterungen mit programmierten Zeitschaltuhren eingestellt werden.</p>
-		<p class="about_text">Die Elektronik basiert auf einem Arduino und einem Raspberry Pi. Die Software wurde mit Processing geschrieben.</p>
+		<p class="about_text">
+			Landwirte sind beim Verreisen eingeschränkt, weil sie Tiere versorgen müssen.
+		</p>
+		<p class="about_text">
+			Darunter zählt auch das Füttern. Um mehr Flexibilität zu bieten haben wir einen vollautomatischen Tierfütterautomat für Hühner entwickelt und gebaut.
+		</p>
+		<p class="about_text">
+			Er übernimmt die Versorgung der Hühner mit Futter und Wasser vollautomatisch.
+		</p>
+		<p class="about_text">
+			Dazu können täglich bis zu zwei Fütterungen mit programmierten Zeitschaltuhren eingestellt werden.
+		</p>
+		<p class="about_text">
+			Die Elektronik basiert auf einem Arduino und einem Raspberry Pi. Die Software wurde mit Processing geschrieben.
+		</p>
 	</div>
 </template>
 <script>
-	import Headline from "~/components/Headline.vue";
+import Headline from '~/components/Headline.vue';
 
-	export default {
-		components: {
-			Headline,
-		},
-	};
+export default {
+	components: {
+		Headline,
+	},
+};
 </script>
 <style>
 	#second_section{

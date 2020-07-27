@@ -17,38 +17,38 @@ import Section2 from '~/components/sections/Section2.vue';
 import Section3 from '~/components/sections/Section3.vue';
 import FooterSection from '~/components/sections/FooterSection.vue';
 
-import SelectionsContainer from '~/components/SelectionsContainer.vue'
+import SelectionsContainer from '~/components/SelectionsContainer.vue';
 
 export default {
-  components: {
+	components: {
 		CookieAlert,
 		Section1,
 		Section2,
-    Section3,
+		Section3,
 		FooterSection,
 		SelectionsContainer,
-  },
+	},
+	mounted() {
+		this.checkDeviceType();
+	},
 	methods: {
-		checkDeviceType: function(){
-			let md = new MobileDetect(window.navigator.userAgent);
-		  let html = document.getElementsByTagName("html")[0];
+		checkDeviceType() {
+			const md = new MobileDetect(window.navigator.userAgent);
+		  const html = document.getElementsByTagName('html')[0];
 
-		  this.setClassState(md.mobile(),html,"mobile");
-		  this.setClassState(md.phone(),html,"phone");
-		  this.setClassState(md.tablet(),html,"tablet")
+		  this.setClassState(md.mobile(), html, 'mobile');
+		  this.setClassState(md.phone(), html, 'phone');
+		  this.setClassState(md.tablet(), html, 'tablet');
 		},
-		setClassState: function(condition, element, class_name){
-		  if(condition){
+		setClassState(condition, element, class_name) {
+		  if (condition) {
 		    element.classList.add(class_name);
-		  }else{
+		  } else {
 		    element.classList.remove(class_name);
 		  }
-		}
+		},
 	},
-	mounted: function() {
-		this.checkDeviceType();
-	}
-}
+};
 </script>
 
 <style>
