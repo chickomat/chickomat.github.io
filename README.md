@@ -1,6 +1,7 @@
 [![PageSpeed Desktop](https://img.shields.io/badge/PageSpeed%20Desktop-97%25-green)](https://developers.google.com/speed/pagespeed/insights/?hl=de&url=domspatzen-quantum.de&tab=desktop)
 [![PageSpeed Desktop](https://img.shields.io/badge/PageSpeed%20Mobile-86%25-orange)](https://developers.google.com/speed/pagespeed/insights/?hl=de&url=domspatzen-quantum.de)
 [![License](https://img.shields.io/github/license/chickomat/chickomat.github.io)](https://github.com/chickomat/chickomat.github.io/blob/dev/LICENSE)
+![GitHub last commit](https://img.shields.io/github/last-commit/chickomat/chickomat.github.io)
 
 # Chickomat Website
 
