@@ -10,18 +10,10 @@ export default {
 			{ hid: 'description', name: 'description', content: 'Informationen und Bilder zum Jugend Forscht Projekt Chickomat. Von Jonathan Treffler, Janik Atzenbeck, Christoph Greger.', },
 		],
 		link: [
-			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico', },
+			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.jpg', },
 			{ rel: 'preload', href: '/fonts/POLYA.woff2', as: 'font', type: 'font/woff2', crossorigin: '', },
 		],
 		script: [
-			/* {
-				src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
-				type: 'text/javascript',
-			},
-			{
-				src: 'https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js',
-				type: 'text/javascript',
-			}, */
 			{
 				src: 'https://cdn.jsdelivr.net/npm/mobile-detect@1.4.3/mobile-detect.min.js',
 				type: 'text/javascript',
