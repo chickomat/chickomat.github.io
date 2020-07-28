@@ -39,7 +39,7 @@ export default {
 	modules: [
 		'@nuxtjs/pwa',
 	],
-  pwa: {
+	pwa: {
 		icon: {
 			iconSrc: 'assets/logo.png',
 		},
