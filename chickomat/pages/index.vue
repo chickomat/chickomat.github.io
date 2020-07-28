@@ -35,39 +35,39 @@ export default {
 		checkDeviceType() {
 			// eslint-disable-next-line
 			const md = new MobileDetect(window.navigator.userAgent);
-		  const html = document.getElementsByTagName('html')[0];
+			const html = document.getElementsByTagName('html')[0];
 
-		  this.setClassState(md.mobile(), html, 'mobile');
-		  this.setClassState(md.phone(), html, 'phone');
-		  this.setClassState(md.tablet(), html, 'tablet');
+			this.setClassState(md.mobile(), html, 'mobile');
+			this.setClassState(md.phone(), html, 'phone');
+			this.setClassState(md.tablet(), html, 'tablet');
 		},
 		setClassState(condition, element, className) {
-		  if (condition) {
-		    element.classList.add(className);
-		  } else {
-		    element.classList.remove(className);
-		  }
+			if (condition) {
+				element.classList.add(className);
+			} else {
+				element.classList.remove(className);
+			}
 		},
 	},
 };
 </script>
 
 <style>
-	:root{
-    --blueprintColor: #269;
-    --blueprintColorDarker: #123650;
-	  --red: #ea4335;
-	  --blue: #b0d3b6;
-	}
-	.section{
-	    width: 100%;
-	}
-	.section:not(#footer_section):not(#first_section){
-	    padding-bottom: 1%;
-	    padding-top: 1%;
-	}
-	html.phone .section:not(#footer_section):not(#first_section){
-	    padding-bottom: 5%;
-	    padding-top: 2%;
-	}
+:root{
+	--blueprintColor: #269;
+	--blueprintColorDarker: #123650;
+	--red: #ea4335;
+	--blue: #b0d3b6;
+}
+.section{
+	width: 100%;
+}
+.section:not(#footer_section):not(#first_section){
+	padding-bottom: 1%;
+	padding-top: 1%;
+}
+html.phone .section:not(#footer_section):not(#first_section){
+	padding-bottom: 5%;
+	padding-top: 2%;
+}
 </style>
