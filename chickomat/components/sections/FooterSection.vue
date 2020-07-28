@@ -1,8 +1,10 @@
 <template>
-	<div class="section" id="footer_section">
-		<p class="footer_text footer_text_copyright">©Jonathan Treffler (13), Janik Atzenbeck (12), Christoph Greger (13), 2016</p>
-    	<div class="footer_text footer_text_phone_copyright">
-    		<span>Jonathan Treffler (13)</span>
+	<div id="footer_section" class="section">
+		<p class="footer_text footer_text_copyright">
+			©Jonathan Treffler (13), Janik Atzenbeck (12), Christoph Greger (13), 2016
+		</p>
+		<div class="footer_text footer_text_phone_copyright">
+			<span>Jonathan Treffler (13)</span>
 			<span>Janik Atzenbeck (12)</span>
 			<span>Christoph Greger (13)</span>
 			<span>2016</span>

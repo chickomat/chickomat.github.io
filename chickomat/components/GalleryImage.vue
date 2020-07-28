@@ -1,22 +1,38 @@
 <template>
 	<picture
-		v-bind:alt="alt"
 		class="picture"
-		v-bind:data-id="id"
-		v-bind:data-source="source"
-		v-bind:data-jpg-src="require('~/assets/pictures/' + src)"
-		v-bind:data-webp-src="require('~/assets/pictures/' + this.src + '?webp')"
-		v-on:click="$parent.$emit('zoomPicture', id)"
+		:data-id="id"
+		:data-source="source"
+		:data-jpg-src="require('~/assets/pictures/' + src)"
+		:data-webp-src="require('~/assets/pictures/' + src + '?webp')"
+		@click="$parent.$emit('zoomPicture', id)"
 	>
-		<source :srcSet="require('~/assets/pictures/' + this.src + '?webp')" type="image/webp" />
-		<source :srcSet="require('~/assets/pictures/' + this.src + '?resize&sizes[]=200&sizes[]=300&sizes[]=600&sizes[]=700&sizes[]=800&sizes[]=850').srcSet" type="image/jpg" />
-		<img :src="require('~/assets/pictures/' + src)" />
+		<source :srcSet="require('~/assets/pictures/' + src + '?format=webp&resize&sizes[]=200&sizes[]=300&sizes[]=600&sizes[]=700').srcSet" type="image/webp">
+		<source :srcSet="require('~/assets/pictures/' + src + '?format=jpg&resize&sizes[]=200&sizes[]=300&sizes[]=600&sizes[]=700').srcSet" type="image/jpg">
+		<img :src="require('~/assets/pictures/' + src)" :alt="alt">
 	</picture>
 </template>
 <script>
-	export default {
-		props: ['id', 'src', 'alt', 'source'],
-	}
+export default {
+	props: {
+		id: {
+			type: Number,
+			default: 0,
+		},
+		src: {
+			type: String,
+			default: '',
+		},
+		alt: {
+			type: String,
+			default: '',
+		},
+		source: {
+			type: String,
+			default: '',
+		},
+	},
+};
 </script>
 <style>
 	.picture, .picture img {

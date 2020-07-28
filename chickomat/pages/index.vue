@@ -17,56 +17,57 @@ import Section2 from '~/components/sections/Section2.vue';
 import Section3 from '~/components/sections/Section3.vue';
 import FooterSection from '~/components/sections/FooterSection.vue';
 
-import SelectionsContainer from '~/components/SelectionsContainer.vue'
+import SelectionsContainer from '~/components/SelectionsContainer.vue';
 
 export default {
-  components: {
+	components: {
 		CookieAlert,
 		Section1,
 		Section2,
-    Section3,
+		Section3,
 		FooterSection,
 		SelectionsContainer,
-  },
-	methods: {
-		checkDeviceType: function(){
-			let md = new MobileDetect(window.navigator.userAgent);
-		  let html = document.getElementsByTagName("html")[0];
-
-		  this.setClassState(md.mobile(),html,"mobile");
-		  this.setClassState(md.phone(),html,"phone");
-		  this.setClassState(md.tablet(),html,"tablet")
-		},
-		setClassState: function(condition, element, class_name){
-		  if(condition){
-		    element.classList.add(class_name);
-		  }else{
-		    element.classList.remove(class_name);
-		  }
-		}
 	},
-	mounted: function() {
+	mounted() {
 		this.checkDeviceType();
-	}
-}
+	},
+	methods: {
+		checkDeviceType() {
+			// eslint-disable-next-line
+			const md = new MobileDetect(window.navigator.userAgent);
+			const html = document.getElementsByTagName('html')[0];
+
+			this.setClassState(md.mobile(), html, 'mobile');
+			this.setClassState(md.phone(), html, 'phone');
+			this.setClassState(md.tablet(), html, 'tablet');
+		},
+		setClassState(condition, element, className) {
+			if (condition) {
+				element.classList.add(className);
+			} else {
+				element.classList.remove(className);
+			}
+		},
+	},
+};
 </script>
 
 <style>
-	:root{
-    --blueprintColor: #269;
-    --blueprintColorDarker: #123650;
-	  --red: #ea4335;
-	  --blue: #b0d3b6;
-	}
-	.section{
-	    width: 100%;
-	}
-	.section:not(#footer_section):not(#first_section){
-	    padding-bottom: 1%;
-	    padding-top: 1%;
-	}
-	html.phone .section:not(#footer_section):not(#first_section){
-	    padding-bottom: 5%;
-	    padding-top: 2%;
-	}
+:root{
+	--blueprintColor: #269;
+	--blueprintColorDarker: #123650;
+	--red: #ea4335;
+	--blue: #b0d3b6;
+}
+.section{
+	width: 100%;
+}
+.section:not(#footer_section):not(#first_section){
+	padding-bottom: 1%;
+	padding-top: 1%;
+}
+html.phone .section:not(#footer_section):not(#first_section){
+	padding-bottom: 5%;
+	padding-top: 2%;
+}
 </style>

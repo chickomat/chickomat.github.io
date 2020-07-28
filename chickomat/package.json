@@ -8,22 +8,29 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "npm run lint:js",
+    "lint:fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "@nuxtjs/pwa": "^3.0.0-0",
     "mozjpeg": "^7.0.0",
+    "responsive-loader": "npm:responsive-loader-webp@^1.2.0-beta.2",
     "nuxt": "^2.14.0",
-    "remove": "^0.1.5",
     "vue-lazyload": "^1.3.3"
   },
   "devDependencies": {
+    "@nuxtjs/eslint-config": "^3.1.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.5.0",
     "@aceforth/nuxt-optimized-images": "^1.1.0",
+    "eslint-plugin-nuxt": "^1.0.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-pngquant": "^9.0.0",
     "imagemin-svgo": "^8.0.0",
     "lqip-loader": "^2.2.0",
-    "responsive-loader": "^1.2.0",
     "sharp": "^0.25.4",
     "sqip-loader": "^1.0.0",
     "webp-loader": "^0.6.0"
