@@ -3,13 +3,13 @@
 		<div class="zoom_blur_background" @click="closeZoom" />
 		<picture @click="closeZoom">
 			<source :srcset="currentWebpSrc" type="image/webp">
-			<img class="zoomed_image" :src="currentJpgSrc" type="image/jpg">
+			<img class="zoomed_image" :src="currentJpgSrc" type="image/jpg" alt="">
 		</picture>
 		<span class="zoomed_image_source" />
 		<div class="gallery_control_container">
 			<img class="gallery_control" alt="" src="~/assets/arrow_back.svg" @click="scroll(-1)">
 		</div>
-		<div class="picture_container">
+		<div class="pictureContainer">
 			<slot />
 		</div>
 		<div class="gallery_control_container">
@@ -30,147 +30,222 @@ export default {
 	mounted() {
 		this.$on('zoomPicture', function(id) {
 			let picture;
-			const picture_container = $(this.$el).find('.picture_container')[0];
-			console.log(picture_container);
-			const pictures = picture_container.childNodes;
+			const pictureContainer = this.$el.querySelector('.pictureContainer');
+
+			const pictures = pictureContainer.children;
 
 			for (let i = 0; i < pictures.length; i++) {
-				if ($(pictures[i]).attr('data-id') == id) {
+				if (pictures[i].getAttribute('data-id') === id) {
 					picture = pictures[i];
 				}
 			}
 
-			  $(this.$el).addClass('zoom');
+			this.$el.classList.add('zoom');
 
-			  const pos = $(picture).offset();
-			  const height = $(picture).height();
-			  const width = $(picture).width();
+			const pos = picture.getBoundingClientRect();
+			const height = pos.height;
+			const width = pos.width;
 
-			const zoomedImage = $(this.$el).find('.zoomed_image');
-			zoomedImage.show();
+			const zoomedImage = this.$el.querySelector('.zoomed_image');
+			zoomedImage.style.display = '';
 
-			this.currentWebpSrc = $(picture).attr('data-webp-src');
-			this.currentJpgSrc = $(picture).attr('data-jpg-src');
+			this.currentWebpSrc = picture.getAttribute('data-webp-src');
+			this.currentJpgSrc = picture.getAttribute('data-jpg-src');
 
-			  function setToOrgiginalPos(pos, width, height) {
-			    return new Promise(function(resolve, reject) {
-					console.log(pos);
-			      zoomedImage.offset(pos);
-			      zoomedImage.css('width', width);
-			      zoomedImage.css('height', height);
-			      zoomedImage.css('max-width', width);
-			      zoomedImage.css('max-height', height);
-			      resolve();
-			    });
-			  }
-			function activateBlurBackground(thisEl) {
+			function setSource(thisEl, picture) {
 				return new Promise(function(resolve, reject) {
-					const zoomBlurBackground = $(thisEl).find('.zoom_blur_background');
-					zoomBlurBackground.show();
-					zoomBlurBackground.animate({
-						opacity: 0.8,
-					});
+					const source = picture.getAttribute('data-source');
+					if (source) {
+						thisEl.querySelector('.zoomed_image_source').textContent = 'Quelle: ' + source;
+					} else {
+						thisEl.querySelector('.zoomed_image_source').textContent = '';
+					}
+
+					resolve();
 				});
 			}
-			  function centerImagePX() {
-			    return new Promise(function(resolve, reject) {
-			      zoomedImage.animate({
-			        top: ($('html').height() - zoomedImage.height()) / 2 + 'px',
-			        left: ($('html').width() - zoomedImage.width()) / 2 + 'px',
-			      }, function() {
-			        resolve();
-			      });
-			    });
-			  }
-			  function centerImagePC() {
-			    return new Promise(function(resolve, reject) {
-			      zoomedImage.css({
-			        top: '50%',
-			        left: '50%',
-			        transform: 'translate(-50%, -50%)',
-			      });
-			      resolve();
-			    });
-			  }
-			  function extendPX() {
-			    return new Promise(function(resolve, reject) {
-			      zoomedImage.css('width', '');
-			      zoomedImage.css('height', '');
-			      zoomedImage.animate({
-			        'max-width': $('html').width() + 'px',
-			        'max-height': $('html').height() + 'px',
-			      }, 'linear', function() {
-			        resolve();
-			      });
-			    });
-			  }
-			  function extendPC() {
-			    return new Promise(function(resolve, reject) {
-			      zoomedImage[0].style.maxWidth = '';
-			      zoomedImage[0].style.maxWidth = '100%';
-			      zoomedImage[0].style.maxHeight = '';
-			      zoomedImage[0].style.maxHeight = '100%';
-			      resolve();
-			    });
-			  }
-			  function setSource(thisEl, picture) {
-			      return new Promise(function(resolve, reject) {
-			          const source = $(picture).attr('data-source');
-					console.log(picture, source);
-			          if (source) {
-						$(thisEl).find('.zoomed_image_source').text('Quelle: ' + source);
-			          } else {
-			            $(thisEl).find('.zoomed_image_source').text('');
-			          }
-			         resolve();
-			      });
-			  }
 
-			  setSource(this.$el, picture)
-			  .then(setToOrgiginalPos(pos, width, height))
+			function setToOrgiginalPos(pos, width, height) {
+				return new Promise(function(resolve, reject) {
+					zoomedImage.style.top = pos.top + 'px';
+					zoomedImage.style.left = pos.left + 'px';
+					zoomedImage.style.width = width + 'px';
+					zoomedImage.style.height = height + 'px';
+					zoomedImage.style.maxWidth = width + 'px';
+					zoomedImage.style.maxHeight = height + 'px';
+
+					resolve();
+				});
+			}
+
+			function activateBlurBackground(thisEl) {
+				return new Promise(function(resolve, reject) {
+					const zoomBlurBackground = thisEl.querySelector('.zoom_blur_background');
+					zoomBlurBackground.style.display = '';
+					zoomBlurBackground.style.opacity = 0.8;
+
+					resolve();
+				});
+			}
+
+			function centerImagePX() {
+				return new Promise(function(resolve, reject) {
+					const htmlBounds = document.getElementsByTagName('html')[0].getBoundingClientRect();
+					const zoomedImageBounds = zoomedImage.getBoundingClientRect();
+
+					zoomedImage.classList.add('topLeftTransition');
+					zoomedImage.style.top = (htmlBounds.height - zoomedImageBounds.height) / 2 + 'px';
+					zoomedImage.style.left = (htmlBounds.width - zoomedImageBounds.width) / 2 + 'px';
+
+					setTimeout(function() {
+						zoomedImage.classList.remove('topLeftTransition');
+						resolve();
+					}, 500);
+				});
+			}
+
+			function centerImagePC() {
+				return new Promise(function(resolve, reject) {
+					zoomedImage.style.top = '50%';
+					zoomedImage.style.left = '50%';
+					zoomedImage.style.transform = 'translate(-50%, -50%)';
+
+					resolve();
+				});
+			}
+
+			function extendPX() {
+				return new Promise(function(resolve, reject) {
+					zoomedImage.style.width = '';
+					zoomedImage.style.height = '';
+
+					const htmlBounds = document.getElementsByTagName('html')[0].getBoundingClientRect();
+
+					zoomedImage.classList.add('maxWidthHeightTransition');
+					zoomedImage.style.maxWidth = htmlBounds.width + 'px';
+					zoomedImage.style.maxHeight = htmlBounds.height + 'px';
+
+					setTimeout(function() {
+						zoomedImage.classList.remove('maxWidthHeightTransition');
+						resolve();
+					}, 500);
+				});
+			}
+
+			function extendPC() {
+				return new Promise(function(resolve, reject) {
+					zoomedImage.style.maxWidth = '';
+					zoomedImage.style.maxWidth = '100%';
+					zoomedImage.style.maxHeight = '';
+					zoomedImage.style.maxHeight = '100%';
+
+					resolve();
+				});
+			}
+
+			function activateClosing(thisEl) {
+				const zoomBlurBackground = thisEl.querySelector('.zoom_blur_background');
+				return new Promise(function(resolve, reject) {
+					zoomBlurBackground.classList.add('closeable');
+					resolve();
+				});
+			}
+
+			setSource(this.$el, picture)
+				.then(setToOrgiginalPos(pos, width, height))
 				.then(activateBlurBackground(this.$el))
-			  .then(centerImagePX)
-			  .then(centerImagePC)
-			  .then(extendPX)
-			  .then(extendPC);
+				.then(centerImagePX)
+				.then(centerImagePC)
+				.then(extendPX)
+				.then(extendPC)
+				.then(activateClosing(this.$el));
 		});
 	},
 	methods: {
 		scroll(direction) {
-			  const picture_container = $(this.$el).find('.picture_container')[0]; ;
-			  const pictures = picture_container.childNodes;
+			const pictureContainer = this.$el.querySelector('.pictureContainer');
+			const pictures = pictureContainer.children;
 
-			  const new_current_id = this.activeId + direction;
+			const newCurrentId = this.activeId + direction;
 
-			  let new_current_picture;
-			  for (let i = 0; i < pictures.length; i++) {
-			    if ($(pictures[i]).attr('data-id') == new_current_id) {
-			      new_current_picture = pictures[i];
-			    }
-			  }
+			let newCurrentPicture;
+			for (let i = 0; i < pictures.length; i++) {
+				if (pictures[i].getAttribute('data-id') === newCurrentId) {
+					newCurrentPicture = pictures[i];
+				}
+			}
 
-			  if (new_current_picture) {
-			    const offset = 0;
-			    $(picture_container).scrollTo(new_current_picture, 500, { offset, });
-				this.activeId = new_current_id;
-			  }
+			if (newCurrentPicture) {
+				this.scrollToElement({
+					container: pictureContainer,
+					element: newCurrentPicture,
+					duration: 500,
+				});
+
+				this.activeId = newCurrentId;
+			}
 		},
 		closeZoom() {
-			const zoomedImage = $(this.$el).find('.zoomed_image');
-			const zoomBlurBackground = $(this.$el).find('.zoom_blur_background');
+			const zoomBlurBackground = this.$el.querySelector('.zoom_blur_background');
 
-			const self = this;
-			zoomBlurBackground.animate({
-				opacity: 0,
-			}, function() {
-				$(self.$el).removeClass('zoom');
-				zoomBlurBackground.hide();
-			});
+			if (zoomBlurBackground.classList.contains('closeable')) {
+				const zoomedImage = this.$el.querySelector('.zoomed_image');
 
-			zoomedImage.hide();
-			zoomedImage.removeAttr('style');
-			this.currentWebpSrc = '';
-			this.currentJpgSrc = '';
+				const self = this;
+				zoomBlurBackground.style.opacity = 0;
+
+				setTimeout(function() {
+					self.$el.classList.remove('zoom');
+					zoomBlurBackground.style.display = 'none';
+				}, 400);
+
+				zoomedImage.style.display = 'none';
+				zoomedImage.removeAttribute('style');
+				this.currentWebpSrc = '';
+				this.currentJpgSrc = '';
+
+				zoomBlurBackground.classList.remove('closeable');
+			}
+		},
+		getOffset(el) {
+			let _x = 0;
+			let _y = 0;
+			while (el && !isNaN(el.offsetLeft) && !isNaN(el.offsetTop)) {
+				_x += el.offsetLeft;
+				_y += el.offsetTop;
+				el = el.offsetParent;
+			}
+			return { top: _y, left: _x, };
+		},
+		scrollToElement(options) {
+			const scrollLeftStart = options.container.scrollLeft;
+			const containerOffsetLeft = this.getOffset(options.container).left;
+			const scrollLeftEnd = options.element.offsetLeft - containerOffsetLeft;
+
+			let start;
+
+			function easeInOutCubic(x) {
+				return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+			}
+
+			function step(timestamp) {
+				if (start === undefined) {
+					start = timestamp;
+				}
+
+				const elapsed = timestamp - start;
+				const progress = Math.min(elapsed / options.duration, 1);
+
+				const currentLeft = scrollLeftStart + ((scrollLeftEnd - scrollLeftStart) * easeInOutCubic(progress));
+
+				options.container.scrollLeft = currentLeft;
+
+				if (elapsed < options.duration) {
+					window.requestAnimationFrame(step);
+				}
+			}
+
+			window.requestAnimationFrame(step);
 		},
 	},
 };
@@ -198,7 +273,7 @@ export default {
     -webkit-user-select: none;
     user-select: none;
 	}
-	.picture_container {
+	.pictureContainer {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
@@ -208,10 +283,10 @@ export default {
 		scrollbar-width: none;
 		-ms-overflow-style: none;
 	}
-  html.mobile .picture_container {
+  html.mobile .pictureContainer {
     width: 100%;
   }
-	.picture_container::-webkit-scrollbar {
+	.pictureContainer::-webkit-scrollbar {
 			width: 0;
 			height: 0;
 	}
@@ -224,27 +299,35 @@ export default {
 		position: fixed;
 		width: 100%;
 		height: 100%;
+		opacity: 0;
+		transition: opacity 0.4s;
 	}
 	.gallery.zoom .zoom_blur_background {
 		z-index: 2000;
 	}
 	.gallery.zoom .zoomed_image_source {
-	    display: block;
-	    position: fixed;
-	    bottom: 15px;
-	    left: 50%;
-	    transform: translateX(-50%);
+		display: block;
+		position: fixed;
+		bottom: 15px;
+		left: 50%;
+		transform: translateX(-50%);
 	}
-  html.mobile .zoom_blur_background {
-    display: none;
-  }
+	/*html.mobile .zoom_blur_background {
+		display: none;
+		}*/
 	.zoomed_image_source {
-	    display: none;
-	    z-index: 2002;
-	    color: white;
+		display: none;
+		z-index: 2002;
+		color: white;
 	}
 	.zoomed_image {
 		position: fixed;
 		z-index: 2002;
+	}
+	.zoomed_image.topLeftTransition {
+		transition: left 0.5s linear, top 0.5s linear;
+	}
+	.zoomed_image.maxWidthHeightTransition {
+		transition: max-width 0.5s linear, max-height 0.5s linear;
 	}
 </style>

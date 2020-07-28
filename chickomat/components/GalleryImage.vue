@@ -1,21 +1,37 @@
 <template>
 	<picture
-		:alt="alt"
 		class="picture"
 		:data-id="id"
 		:data-source="source"
 		:data-jpg-src="require('~/assets/pictures/' + src)"
-		:data-webp-src="require('~/assets/pictures/' + this.src + '?webp')"
+		:data-webp-src="require('~/assets/pictures/' + src + '?webp')"
 		@click="$parent.$emit('zoomPicture', id)"
 	>
-		<source :srcSet="require('~/assets/pictures/' + this.src + '?webp')" type="image/webp">
-		<source :srcSet="require('~/assets/pictures/' + this.src + '?resize&sizes[]=200&sizes[]=300&sizes[]=600&sizes[]=700&sizes[]=800&sizes[]=850').srcSet" type="image/jpg">
-		<img :src="require('~/assets/pictures/' + src)">
+		<source :srcSet="require('~/assets/pictures/' + src + '?format=webp&resize&sizes[]=200&sizes[]=300&sizes[]=600&sizes[]=700').srcSet" type="image/webp">
+		<source :srcSet="require('~/assets/pictures/' + src + '?format=jpg&resize&sizes[]=200&sizes[]=300&sizes[]=600&sizes[]=700').srcSet" type="image/jpg">
+		<img :src="require('~/assets/pictures/' + src)" :alt="alt">
 	</picture>
 </template>
 <script>
 export default {
-	props: [ 'id', 'src', 'alt', 'source', ],
+	props: {
+		id: {
+			type: String,
+			default: '',
+		},
+		src: {
+			type: String,
+			default: '',
+		},
+		alt: {
+			type: String,
+			default: '',
+		},
+		source: {
+			type: String,
+			default: '',
+		},
+	},
 };
 </script>
 <style>

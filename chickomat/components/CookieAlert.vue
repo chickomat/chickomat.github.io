@@ -1,5 +1,5 @@
 <template>
-	<div id="cookie_alert">
+	<div v-if="cookieAlertActive" id="cookie_alert">
 		<p id="cookie_alert_headline">
 			Darf diese Website Cookies verwenden?
 		</p>
@@ -15,19 +15,25 @@
 </template>
 <script>
 export default {
+	data() {
+		return {
+			cookieAlertActive: false,
+		};
+	},
 	mounted() {
 		this.check_cookie_permission();
 	},
 	methods: {
 		run_google_analytics() {
-			/* window.dataLayer = window.dataLayer || [];
-				function gtag(){dataLayer.push(arguments);}
-				gtag('js', new Date());
-				gtag('config', 'UA-139965444-1'); */
+			window.dataLayer = window.dataLayer || [];
+			// eslint-disable-next-line
+			function gtag() { dataLayer.push(arguments); }
+			gtag('js', new Date());
+			gtag('config', 'UA-139965444-1');
 		},
 		check_cookie_permission() {
-			if (this.getCookie('cookie_level') == '') {
-				$('#cookie_alert').show();
+			if (this.getCookie('cookie_level') === '') {
+				this.cookieAlertActive = true;
 			} else {
 				this.cookies_accepted();
 			}
@@ -38,10 +44,10 @@ export default {
 		accept_cookies() {
 			this.setCookie('cookie_level', '1', 400);
 			this.cookies_accepted();
-			$('#cookie_alert').hide();
+			this.cookieAlertActive = false;
 		},
 		decline_cookies() {
-			$('#cookie_alert').hide();
+			this.cookieAlertActive = false;
 		},
 		getCookie(cname) {
 			const name = cname + '=';
@@ -49,10 +55,10 @@ export default {
 			const ca = decodedCookie.split(';');
 			for (let i = 0; i < ca.length; i++) {
 				let c = ca[i];
-				while (c.charAt(0) == ' ') {
+				while (c.charAt(0) === ' ') {
 					c = c.substring(1);
 				}
-				if (c.indexOf(name) == 0) {
+				if (c.indexOf(name) === 0) {
 					return c.substring(name.length, c.length);
 				}
 			}
@@ -69,7 +75,6 @@ export default {
 </script>
 <style>
 	#cookie_alert{
-			display: none;
 			position: fixed;
 			bottom: 0px;
 			left: 50%;
@@ -101,6 +106,7 @@ export default {
 			height: 40px;
 	}
 	.cookie_alert_button:first-child{
+			background-color: var(--green2);
 			font-weight: bold;
 	}
 	html.phone .cookie_alert_button{

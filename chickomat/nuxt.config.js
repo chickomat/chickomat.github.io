@@ -14,20 +14,16 @@ export default {
 			{ rel: 'preload', href: '/fonts/POLYA.woff2', as: 'font', type: 'font/woff2', crossorigin: '', },
 		],
 		script: [
-			{
+			/* {
 				src: 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
 				type: 'text/javascript',
 			},
 			{
 				src: 'https://cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js',
 				type: 'text/javascript',
-			},
+			}, */
 			{
 				src: 'https://cdn.jsdelivr.net/npm/mobile-detect@1.4.3/mobile-detect.min.js',
-				type: 'text/javascript',
-			},
-			{
-				src: 'https://cdn.jsdelivr.net/npm/sweetalert2@8',
 				type: 'text/javascript',
 			},
 			{

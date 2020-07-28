@@ -3,14 +3,28 @@
 		<span id="main_headline">Der Chickomat</span>
 		<svg
 			id="scroll_button"
-			onclick="$('body').scrollTo('#second_section',{duration: 500, easing: 'swing'});"
 			xmlns="http://www.w3.org/2000/svg"
 			width="75"
 			height="75"
 			viewBox="0 0 24 24"
+			@click="scrollToSection2"
 		><path fill="var(--blueprintColor)" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" /><path fill="none" d="M0 0h24v24H0V0z" /></svg>
 	</div>
 </template>
+<script>
+export default {
+	methods: {
+		scrollToSection2() {
+			const yPosition = document.getElementById('second_section').offsetTop;
+
+			window.scroll({
+				top: yPosition,
+				behavior: 'smooth',
+			});
+		},
+	},
+};
+</script>
 <style>
 	#first_section {
 		min-width: 100%;
