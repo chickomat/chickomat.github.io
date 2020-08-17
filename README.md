@@ -3,6 +3,7 @@
 [![License](https://img.shields.io/github/license/chickomat/chickomat.github.io)](https://github.com/chickomat/chickomat.github.io/blob/dev/LICENSE)
 ![Lint](https://github.com/chickomat/chickomat.github.io/workflows/Lint/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chickomat/chickomat.github.io)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=chickomat/chickomat.github.io)](https://dependabot.com)
 
 # Chickomat Website
 
