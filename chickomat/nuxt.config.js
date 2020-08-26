@@ -11,7 +11,7 @@ export default {
 		],
 		link: [
 			{ rel: 'icon', type: 'image/x-icon', href: '/favicon.jpg', },
-			{ rel: 'preload', href: '/fonts/POLYA.woff2', as: 'font', type: 'font/woff2', crossorigin: '', },
+			{ rel: 'preload', href: '/fonts/Archistico.woff2', as: 'font', type: 'font/woff2', crossorigin: '', },
 		],
 		script: [
 			{
