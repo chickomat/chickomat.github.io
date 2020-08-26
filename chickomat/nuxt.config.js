@@ -41,7 +41,14 @@ export default {
 	],
 	pwa: {
 		icon: {
-			iconSrc: 'assets/logo.png',
+			fileName: 'logo.png',
+			sizes: [ 64, 120, 144, 152, 192, 384, 512, ],
+			purpose: [ 'any', 'maskable', ],
+		},
+		manifest: {
+			name: 'Chickomat',
+			lang: 'de',
+			background_color: '#269',
 		},
 	},
 	build: {
