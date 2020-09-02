@@ -2,7 +2,7 @@
   "name": "chickomat",
   "version": "1.0.0",
   "description": "The website for our Jugend Forscht Project",
-  "author": "TessyPowder",
+  "author": "Jonathan Treffler",
   "private": true,
   "scripts": {
     "dev": "nuxt",
