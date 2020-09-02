@@ -11,13 +11,13 @@
 </template>
 
 <script>
-import CookieAlert from '~/components/CookieAlert.vue';
-import Section1 from '~/components/sections/Section1.vue';
-import Section2 from '~/components/sections/Section2.vue';
-import Section3 from '~/components/sections/Section3.vue';
-import FooterSection from '~/components/sections/FooterSection.vue';
+import CookieAlert from "~/components/CookieAlert.vue";
+import Section1 from "~/components/sections/Section1.vue";
+import Section2 from "~/components/sections/Section2.vue";
+import Section3 from "~/components/sections/Section3.vue";
+import FooterSection from "~/components/sections/FooterSection.vue";
 
-import SelectionsContainer from '~/components/SelectionsContainer.vue';
+import SelectionsContainer from "~/components/SelectionsContainer.vue";
 
 export default {
 	components: {
@@ -35,11 +35,11 @@ export default {
 		checkDeviceType() {
 			// eslint-disable-next-line
 			const md = new MobileDetect(window.navigator.userAgent);
-			const html = document.getElementsByTagName('html')[0];
+			const html = document.getElementsByTagName("html")[0];
 
-			this.setClassState(md.mobile(), html, 'mobile');
-			this.setClassState(md.phone(), html, 'phone');
-			this.setClassState(md.tablet(), html, 'tablet');
+			this.setClassState(md.mobile(), html, "mobile");
+			this.setClassState(md.phone(), html, "phone");
+			this.setClassState(md.tablet(), html, "tablet");
 		},
 		setClassState(condition, element, className) {
 			if (condition) {
