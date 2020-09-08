@@ -1,0 +1,38 @@
+name: Lint Fix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  lint_fix:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up git
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "Github Actions"
+        git config pull.rebase false
+        git pull
+    - name: Setup Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: 14
+    - name: Install dependencies
+      working-directory: chickomat
+      run: npm ci
+    - name: Lint fix
+      working-directory: chickomat
+      run: npm run lint:fix
+    - name: Commit changes
+      continue-on-error: true
+      run: |
+        git pull
+        git add -A
+        git commit -m "fixed linting errors" -a
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: dev
+    
