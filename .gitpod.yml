@@ -10,3 +10,13 @@ tasks:
     command: |
       cd chickomat
       npm run dev
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: true
+    addCheck: true
+    addComment: true
+    addBadge: false
