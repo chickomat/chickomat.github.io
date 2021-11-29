@@ -1,6 +1,7 @@
 
 export default {
 	mode: "spa",
+	telemetry: false,
 	head: {
 		title: "Chickomat Projekt Jugend Forscht",
 		meta: [
