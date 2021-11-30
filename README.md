@@ -4,7 +4,6 @@
 ![Lint](https://github.com/chickomat/chickomat.github.io/workflows/Lint/badge.svg)
 ![Deploy to GitHub Pages](https://github.com/chickomat/chickomat.github.io/workflows/Deploy%20to%20GitHub%20Pages/badge.svg)
 ![GitHub last commit](https://img.shields.io/github/last-commit/chickomat/chickomat.github.io)
-[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=chickomat/chickomat.github.io)](https://dependabot.com)
 
 # Chickomat Website
 
